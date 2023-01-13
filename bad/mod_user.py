@@ -34,6 +34,34 @@ def do_login():
 
     return render_template('user.login.mfa.html')
 
+    @mod_user.route('/login', methods=['GET', 'POST'])
+    def do_login():
+
+        session.pop('username', None)
+
+        if request.method == 'POST':
+
+            username = request.form.get('username')
+            password = request.form.get('password')
+            otp = request.form.get('otp')
+
+            username = libuser.login(username, password)
+
+            if not username:
+                flash("Invalid user or password");
+                return render_template('user.login.mfa.html')
+
+            if libmfa.mfa_is_enabled(username):
+                if not libmfa.mfa_validate(username, otp):
+                    flash("Invalid OTP");
+                    return render_template('user.login.mfa.html')
+
+            response = make_response(redirect('/'))
+            response = libsession.create(response=response, username=username)
+            return response
+
+        return render_template('user.login.mfa.html')
+
 
 @mod_user.route('/create', methods=['GET', 'POST'])
 def do_create():
