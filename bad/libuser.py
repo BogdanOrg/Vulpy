@@ -28,6 +28,9 @@ def create(username, password):
     conn.commit()
     conn.close()
 
+def my_func():
+
+    tmp = "my func"
 
 def userlist():
 
