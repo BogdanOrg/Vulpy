@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, request, g, session, make_response, flash
 import libmfa
-import libuser
+import libuser1
 import libsession
 
 mod_user1 = Blueprint('mod_user1', __name__, template_folder='templates')
@@ -17,7 +17,7 @@ def do_login():
         password = request.form.get('password')
         otp = request.form.get('otp')
 
-        username = libuser.login(username, password)
+        username = libuser1.login(username, password)
 
         if not username:
             flash("Invalid user or password");
@@ -45,7 +45,7 @@ def do_login():
             password = request.form.get('password')
             otp = request.form.get('otp')
 
-            username = libuser.login(username, password)
+            username = libuser1.login(username, password)
 
             if not username:
                 flash("Invalid user or password");
@@ -77,7 +77,7 @@ def do_create():
             flash("Please, complete username and password")
             return render_template('user.create.html')
 
-        libuser.create(username, password)
+        libuser1.create(username, password)
         flash("User created. Please login.")
         return redirect('/user/login')
 
@@ -101,11 +101,11 @@ def do_chpasswd():
             flash("The passwords don't match")
             return render_template('user.chpasswd.html')
 
-        if not libuser.password_complexity(password):
+        if not libuser1.password_complexity(password):
             flash("The password don't comply our complexity requirements")
             return render_template('user.chpasswd.html')
 
-        libuser.password_change(g.session['username'], password) # = libuser.login(username, password)
+        libuser1.password_change(g.session['username'], password) # = libuser.login(username, password)
         flash("Password changed")
 
     return render_template('user.chpasswd.html')
