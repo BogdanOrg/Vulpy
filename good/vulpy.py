@@ -31,7 +31,7 @@ if csp_file.is_file():
         for line in f.readlines():
             if line.startswith('#'):
                 continue
-            line = line.replace('\n', '')
+            line =  line.replace('\n', '')
             if line:
                 csp += line
         print('CSP:', csp)
