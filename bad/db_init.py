@@ -22,7 +22,6 @@ def db_init_users():
     conn.commit()
     conn.close()
 
-
 def db_init_posts():
 
     conn = sqlite3.connect('db_posts.sqlite')
