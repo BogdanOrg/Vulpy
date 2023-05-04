@@ -19,7 +19,6 @@ def cmd_api_client(message):
             click.echo('Invalid authentication or other error ocurred. Status code: {}'.format(r.status_code))
             return False
 
-
         api_key = r.json()['key']
         print('Received key:', api_key)
 
