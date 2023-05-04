@@ -29,5 +29,6 @@ def cmd_api_client(message):
     r = requests.post('http://127.0.1.1:5000/api/post', json={'text':message}, headers={'X-APIKEY': api_key})
     print(r.text)
 
+    
 if __name__ == '__main__':
     cmd_api_client()
