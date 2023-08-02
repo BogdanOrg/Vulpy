@@ -21,7 +21,6 @@ def db_init_users():
     for u,p in users:
         user_create(u, p)
 
-
 def db_init_posts():
 
     conn = sqlite3.connect('db_posts.sqlite')
