@@ -3,7 +3,6 @@
 import os
 import sqlite3
 
-
 def db_init_users():
 
     users = [
